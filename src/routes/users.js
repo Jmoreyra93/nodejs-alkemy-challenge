@@ -18,9 +18,9 @@ const {
 const router = Router();
 
 router.get('/', getAllRequestValidation, getAllUsers);
-router.post('/', postRequestValidations, createUser);
-router.put('/:id', putRequestValidations, updateUser);
-router.get('/:id', getRequestValidation, getById);
-router.delete('/:id', deleteRequestValidations, deleteUser);
+router.post('', postRequestValidations, createUser);
+router.put('/:id(\\d+)/', putRequestValidations, updateUser);
+router.get('/:id(\\d+)/', getRequestValidation, getById);
+router.delete('/:id(\\d+)/', deleteRequestValidations, deleteUser);
 
 module.exports = router;

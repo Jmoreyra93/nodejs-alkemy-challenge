@@ -49,51 +49,52 @@ const _idExist = check('id').custom(
 );
 
 
-
+// POST  1:01:00
 const postRequestValidations = [
     validJWT,
     hasRole(ADMIN_ROLE),
     _nameRequired,
-    _lastNameRequired,
     _emailRequired,
     _emailValid,
     _emailExist,
     _passwordRequired,
     _roleValid,
-    _dateValid,
     validationResult
 ]
 
+// PUT
 const putRequestValidations = [
     validJWT,
     hasRole(ADMIN_ROLE),
     _idRequied,
-    _idIsMongoDB,
+    //_idIsNumeric,
     _idExist,
     _optionalEmailValid,
     _optionalEmailExist,
     _roleValid,
-    _dateValid,
     validationResult
 ]
 
+// DELETE
 const deleteRequestValidations = [
     validJWT,
     hasRole(ADMIN_ROLE),
     _idRequied,
-    _idIsMongoDB,
+    //_idIsNumeric,
     _idExist,
     validationResult
 ]
 
+// GET ALL
 const getAllRequestValidation = [
     validJWT
 ]
 
+
+// GET
 const getRequestValidation = [
     validJWT,
     _idRequied,
-    _idIsMongoDB,
     _idExist,
     validationResult
 ]
