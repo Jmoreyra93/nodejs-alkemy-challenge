@@ -14,7 +14,7 @@ const login = async(email, password) => {
         const user = await userService.findByEmail(email);
 
         if(!user){
-            throw new AppError('Authentication failed! Email / password does not correct.', 401);
+            throw new AppError('Authentication failed! Email / password does not correct. #1', 401);
         }
 
         //Validación de usaurio habilitado
@@ -25,11 +25,11 @@ const login = async(email, password) => {
         //Validación de password
         const validPassword = await bcrypt.compare(password, user.password);
         if(!validPassword) {
-            throw new AppError('Authentication failed! Email / password does not correct.', 401);
+            throw new AppError('Authentication failed! Email / password does not correct. #2', 401);
         }
 
         //Generar JWT
-        const token = _encrypt(user._id);
+        const token = _encrypt(user.id);
 
         return {
             token,
@@ -59,8 +59,8 @@ const validToken = async (token) => {
         // validar que token sea integro
         let id;
         try {
-             const obj = jwt.verify(token, config.auth.secret);
-             id = obj.id;
+            const obj = jwt.verify(token, config.auth.secret);
+            id = obj.id;
         }catch(verifyError){
             throw new AppError('Authentication failed! Ivalid token', 401, token);
         }
@@ -95,6 +95,18 @@ const validRole = (user, ...roles) => {
     return true;
 }
 
+
+const register = async(email, password) => {
+    const user = {email,password}
+
+    await userService.save(user);
+
+    //MEJORA: enviar email de confirmacion
+
+    return "User registered. Please Log In.";
+}
+
+
 _encrypt = (id) => {
     return jwt.sign({ id }, config.auth.secret, { expiresIn: config.auth.ttl });
 }
@@ -102,5 +114,6 @@ _encrypt = (id) => {
 module.exports = {
     login,
     validToken,
-    validRole
+    validRole,
+    register
 }
