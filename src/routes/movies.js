@@ -26,4 +26,5 @@ router.get('/:id(\\d+)/', getRequestValidation, getMovieById);
 router.delete('/:id(\\d+)/', deleteRequestValidations, deleteMovie);
 router.post('/image', postImageValidations, uploadMovieImage);
 
+
 module.exports = router;
