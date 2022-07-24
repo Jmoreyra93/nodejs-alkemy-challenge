@@ -1,35 +1,14 @@
 const { check } = require('express-validator');
+const multer  = require('multer');
+const upload = multer();
 const AppError = require('../../errors/appError');
 const characterService = require('../../services/characterService');
-const { ROLES, ADMIN_ROLE } = require('../../constants');
+const { ROLES, ADMIN_ROLE, USER_ROLE } = require('../../constants');
 const logger = require('../../loaders/logger');
-const {validationResult} = require('../commons');
+const {validationResult, imageRequired} = require('../commons');
 const { validJWT, hasRole } = require('../auth');
 
 const _nameRequired = check('name', 'Name required').not().isEmpty();
-const _emailRequired = check('email', 'Email required').not().isEmpty();
-const _emailValid = check('email', 'Email is invalid').isEmail();
-const _emailExist = check('email').custom(
-    async (email = '') => {
-        const userFound = await userService.findByEmail(email);
-        if(userFound) {
-            throw new AppError('Email already exist in DB', 400);
-        }
-    }
-);
-
-
-const _optionalEmailValid = check('email', 'Email is invalid').optional().isEmail();
-const _optionalEmailExist = check('email').optional().custom(
-    async (email = '') => {
-        const userFound = await userService.findByEmail(email);
-        if(userFound) {
-            throw new AppError('Email already exist in DB', 400);
-        }
-    }
-);
-
-
 const _roleValid = check('role').optional().custom(
     async (role = '') => {
         if(!ROLES.includes(role)) {
@@ -62,6 +41,19 @@ const _nameNotExist = check('name').custom(
         }
     }
 );
+
+/*
+const uploadImage = () => {
+    return (req, res, next) => {
+        try {
+            upload.single('image'),
+            next();
+        } catch (err) {
+            next(err);
+        }
+    }
+}
+*/
 
 
 
@@ -111,7 +103,21 @@ const getAllRequestValidation = [
 const getRequestValidation = [
     validJWT,
     _idRequied,
+    _idIsNumeric,
     _idExist,
+    validationResult
+]
+
+
+// POST IMAGE
+const postImageValidations = [
+    validJWT,
+    hasRole(ADMIN_ROLE, USER_ROLE),
+    upload.single('image'),
+    _idRequied,
+    _idIsNumeric,
+    _idExist,
+    imageRequired,
     validationResult
 ]
 
@@ -120,5 +126,6 @@ module.exports = {
     putRequestValidations,
     getAllRequestValidation,
     getRequestValidation,
-    deleteRequestValidations
+    deleteRequestValidations,
+    postImageValidations
 }

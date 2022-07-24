@@ -1,5 +1,6 @@
 const express = require('express');
 const movieService = require('../services/movieService');
+const imageService = require('../services/imageService')
 const Success = require('../handlers/successHandler');
 const logger = require('../loaders/logger');
 
@@ -126,6 +127,26 @@ const deleteMovie = async (req, res, next) => {
     }
 };
 
+// POST MOVIO
+
+/**
+ * 
+ * @param {express.Request} req 
+ * @param {express.Response} res 
+ */
+
+
+const uploadMovieImage = async (req, res, next) => {
+    try {
+        const movieId = req.body.id;
+        const image = req.file;
+
+        res.json(new Success(await imageService.uploadMovieImage(movieId, image)));
+    } catch (err) {
+        next(err);
+    }
+};
+
 
 
 module.exports = {
@@ -133,5 +154,6 @@ module.exports = {
     createMovie,
     updateMovie,
     getMovieById,
-    deleteMovie
+    deleteMovie,
+    uploadMovieImage
 }

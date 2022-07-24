@@ -1,9 +1,11 @@
 const { check } = require('express-validator');
+const multer  = require('multer');
+const upload = multer();
 const AppError = require('../../errors/appError');
 const movieService = require('../../services/movieService');
-const { ROLES, ADMIN_ROLE } = require('../../constants');
+const { ROLES, ADMIN_ROLE, USER_ROLE } = require('../../constants');
 const logger = require('../../loaders/logger');
-const {validationResult} = require('../commons');
+const {validationResult, imageRequired} = require('../commons');
 const { validJWT, hasRole } = require('../auth');
 const GenderTypeRepository = require('../../repositories/genderTypeRepository');
 const ContentTypeRepository = require('../../repositories/contentTypeRepository');
@@ -114,10 +116,24 @@ const getRequestValidation = [
     validationResult
 ]
 
+// POST IMAGE
+const postImageValidations = [
+    validJWT,
+    hasRole(ADMIN_ROLE, USER_ROLE),
+    upload.single('image'),
+    _idRequied,
+    _idIsNumeric,
+    _idExist,
+    imageRequired,
+    validationResult
+]
+
+
 module.exports = {
     postRequestValidations,
     putRequestValidations,
     getAllRequestValidation,
     getRequestValidation,
-    deleteRequestValidations
+    deleteRequestValidations,
+    postImageValidations
 }
