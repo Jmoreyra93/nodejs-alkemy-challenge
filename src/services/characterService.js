@@ -1,11 +1,14 @@
 const CharacterRepository = require('../repositories/characterRepository');
 const repository = new CharacterRepository();
+const ImageRepository = require('../repositories/imageRepository');
+const imageRepository = new ImageRepository();
+
 
 
 //ENCONTRAR POR ID
 
 const findById = async(id) => {
-    return await repository.findById(id);
+    return await repository.findByIdWhitMovies(id);
 }
 
 //ENCONTRAR POR NOMBRE
@@ -35,6 +38,8 @@ const update = async(id, c) => {
 //ELIMINAR
 
 const remove = async(id) => {
+    const c = await repository.findById(id)
+    imageRepository.deleteImage(c.image);
     return await repository.remove(id);
 }
 

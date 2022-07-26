@@ -30,6 +30,8 @@ const Character = sequelize.define('Character', {
 
 module.exports = Character;
 
+// ASOCIACIÓN DE PERSONAJES CON PELICULAS
+
 Character.belongsToMany(require('./movies'), {
     through: "charactersMovies",
     as: "movies",

@@ -15,7 +15,7 @@ const Movie = sequelize.define('Movie', {
         unique: true
     },
     creationDate: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull:false
     },
     calification: {
@@ -28,20 +28,28 @@ const Movie = sequelize.define('Movie', {
 
 module.exports = Movie;
 
+// ASOCIACIÓN DE PELICULAS CON PERSONAS
+
 Movie.belongsToMany(require('./characters'), {
     through: "charactersMovies",
-    as: "character",
+    as: "characters",
     foreignKey: "movieId"
 });
 
+// ASOCIACIÓN DE PELICULAS CON TIPO(SERIE/PELICULA)
+
 Movie.belongsTo(require('./contentTypes'), {
     foreignKey: "contentTypeId",
-    targetKey: "id"
+    targetKey: "id",
+    as: 'type'
 });
+
+// ASOCIACIÓN DE PELICULAS CON GENERO
 
 Movie.belongsTo(require('./genderTypes'), {
     foreignKey: "genderTypeId",
-    targetKey: "id"
+    targetKey: "id",
+    as: 'gender'
 });
 
 

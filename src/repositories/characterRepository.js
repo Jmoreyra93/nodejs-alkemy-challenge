@@ -1,6 +1,6 @@
-const bcrypt = require('bcrypt');
+const { Op } = require("sequelize");
 const Character = require('../models/characters');
-const { Op, sequelize } = require("sequelize");
+const Movie = require('../models/movies');
 
 
 class CharacterRepository {
@@ -27,11 +27,25 @@ class CharacterRepository {
                 [Op.eq]: weigth
             }
         }
-        return await Character.findAll({where});
+        return await Character.findAll({
+            where,
+            attributes: ['name','image'],
+        });
     }
 
     async findById(id) {
         return await Character.findByPk(id);
+    }
+
+    async findByIdWhitMovies(id) {
+        return await Character.findByPk(id, {
+            include: [
+                {
+                    model: Movie,
+                    as: "movies"
+                },
+            ],
+        });
     }
     
     async findByName(name) {

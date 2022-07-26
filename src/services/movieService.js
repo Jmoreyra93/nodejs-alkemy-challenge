@@ -1,14 +1,16 @@
 const MovieRepository = require('../repositories/movieRepository');
+const CharacterRepository = require('../repositories/characterRepository');
 const GenderTypeRepository = require('../repositories/genderTypeRepository');
 const ContentTypeRepository = require('../repositories/contentTypeRepository');
 const repository = new MovieRepository();
+const characterRepository = new CharacterRepository();
 const genderTypeRepository = new GenderTypeRepository();
 const contentTypeRepository = new ContentTypeRepository();
 
 //ENCONTRAR POR ID
 
 const findById = async(id) => {
-    return await repository.findById(id);
+    return await repository.findByIdWithCharacters(id);
 }
 
 //ENCONTRAR POR TITULO
@@ -51,11 +53,20 @@ const remove = async(id) => {
     return await repository.remove(id);
 }
 
+
+// ASOCIAR MOVIE CON CHARACTER 
+
+const asociate = async(movie, character )=> {
+    await movie.addCharacter(character);
+
+}
+
 module.exports = {
     findById,
     findByTitle,
     findAll,
     save,
     update,
-    remove
+    remove,
+    asociate
 }

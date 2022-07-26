@@ -1,5 +1,6 @@
 const express = require('express');
 const characterService = require('../services/characterService');
+const imageService = require('../services/imageService');
 const Success = require('../handlers/successHandler');
 const logger = require('../loaders/logger');
 
@@ -127,6 +128,25 @@ const deleteCharacter = async (req, res, next) => {
     }
 };
 
+// POST IMAGE
+
+/**
+ * 
+ * @param {express.Request} req 
+ * @param {express.Response} res 
+ */
+
+
+const uploadCharacterImage = async (req, res, next) => {
+    try {
+        const characterId = req.body.id;
+        const image = req.file;
+
+        res.json(new Success(await imageService.uploadCharacterImage(characterId, image)));
+    } catch (err) {
+        next(err);
+    }
+};
 
 
 module.exports = {
@@ -134,5 +154,7 @@ module.exports = {
     createCharacter,
     updateCharacter,
     getCharacterById,
-    deleteCharacter
+    deleteCharacter,
+    uploadCharacterImage,
+    
 }

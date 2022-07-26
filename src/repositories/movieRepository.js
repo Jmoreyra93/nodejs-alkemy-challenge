@@ -1,6 +1,7 @@
-const { Op, sequelize } = require("sequelize");
+const { Op } = require("sequelize");
 const GenderType = require('../models/genderTypes');
 const Movie = require('../models/movies');
+const Character = require('../models/characters');
 const { parseISO } = require('date-fns');
 
 
@@ -24,8 +25,6 @@ class MovieRepository {
             }
         }
         if(creationDate){
-            creationDate = parseISO(creationDate);
-            creationDate.setHours(-3);
             where.creationDate = {
                 [Op.eq]: creationDate
             }
@@ -42,6 +41,18 @@ class MovieRepository {
 
     async findById(id) {
         return await Movie.findByPk(id);
+    }
+    
+
+    async findByIdWithCharacters(id) {
+        return await Movie.findByPk(id, {
+            include: [
+                'characters',
+                'gender',
+                'type'
+            ],
+            attributes: ['id', 'title','image','creationDate', 'calification'],
+        });
     }
     
     async findByTitle(title) {
@@ -70,6 +81,8 @@ class MovieRepository {
             }
         });
     }
+
+
 }
 
 module.exports = MovieRepository;
