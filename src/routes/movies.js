@@ -27,7 +27,7 @@ router.put('/:id(\\d+)/', putRequestValidations, updateMovie);
 router.get('/:id(\\d+)/', getRequestValidation, getMovieById);
 router.delete('/:id(\\d+)/', deleteRequestValidations, deleteMovie);
 router.post('/image', postImageValidations, uploadMovieImage);
-router.put('/:idMovie(\\d+)/movies/:idMovie(\\d+)/', asociationRequestValidations, asocieteCharacter);
+router.put('/:idMovie(\\d+)/characters/:idCharacter(\\d+)/', asociationRequestValidations, asocieteCharacter);
 
 
 
