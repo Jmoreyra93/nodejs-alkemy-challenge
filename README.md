@@ -73,7 +73,8 @@ exponer la información para que cualquier frontend pueda consumirla.
 ### FALTANTE Y COSAS A MEJORAR
 <hr>
 
-* Falta : Los detalles de Characters con las relaciones. No encuentro el error. Acepto críticas, mejoras, comentarios. Asi como también pueden preguntarme cualquier duda,
+* Falta : Los detalles de Characters con las relaciones. No encuentro el error. Acepto críticas, mejoras, comentarios. Asi como también pueden preguntarme cualquier duda.
+* Mejoras: Me encuentro en la creación de su front con react y bootstrap
 
 
 
