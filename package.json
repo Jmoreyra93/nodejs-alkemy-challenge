@@ -1,7 +1,7 @@
 {
-  "name": "node-06-restserver",
-  "version": "1.0.1",
-  "description": "",
+  "name": "challenge",
+  "version": "0.0.1",
+  "description": "Challenge de nodeJS de Alkemy",
   "main": "index.js",
   "scripts": {
     "dev": "npx nodemon src",
@@ -12,21 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jmoreyra93/nodejs-alkemy-challenge"
+    "url": "git+https://github.com/Jmoreyra93/nodejs-alkemy-challenge.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Julian Moreyra",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Jmoreyra93/nodejs-alkemy-challenge/issues"
   },
   "homepage": "https://github.com/Jmoreyra93/nodejs-alkemy-challenge#readme",
-  "lint-staged": {
-    "*.{js,json}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
   "dependencies": {
     "aws-sdk": "^2.1178.0",
     "bcrypt": "^5.0.1",
