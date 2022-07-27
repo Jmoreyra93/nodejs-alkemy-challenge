@@ -10,12 +10,12 @@
     "prepare": "husky install",
     "lint-staged": "lint-staged"
   },
-  
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jmoreyra93/nodejs-alkemy-challenge.git"
+    "url": "git+https://github.com/Jmoreyra93/nodejs-alkemy-challenge"
   },
-  "author": "Julián Moreyra",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Jmoreyra93/nodejs-alkemy-challenge/issues"
