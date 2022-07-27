@@ -10,17 +10,17 @@
     "prepare": "husky install",
     "lint-staged": "lint-staged"
   },
+  
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ktufernando/node-06-restserver.git"
+    "url": "git+https://github.com/Jmoreyra93/nodejs-alkemy-challenge.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Julián Moreyra",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ktufernando/node-06-restserver/issues"
+    "url": "https://github.com/Jmoreyra93/nodejs-alkemy-challenge/issues"
   },
-  "homepage": "https://github.com/ktufernando/node-06-restserver#readme",
+  "homepage": "https://github.com/Jmoreyra93/nodejs-alkemy-challenge#readme",
   "lint-staged": {
     "*.{js,json}": [
       "prettier --write",
