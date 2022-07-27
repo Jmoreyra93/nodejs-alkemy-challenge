@@ -20,6 +20,12 @@
     "url": "https://github.com/Jmoreyra93/nodejs-alkemy-challenge/issues"
   },
   "homepage": "https://github.com/Jmoreyra93/nodejs-alkemy-challenge#readme",
+  "lint-staged": {
+    "*.{js,json}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "dependencies": {
     "aws-sdk": "^2.1178.0",
     "bcrypt": "^5.0.1",
